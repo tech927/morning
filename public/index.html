@@ -7,7 +7,8 @@
     <meta name="description" content="MORNING STARS INFO - Partagez vos moments">
     <title>MORNING STARS INFO</title>
     
-    <link rel="manifest" href="/manifest.webmanifest">
+    <!-- Retirer le manifest pour désactiver PWA -->
+    <!-- <link rel="manifest" href="/manifest.webmanifest"> -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
     
     <link rel="stylesheet" href="/css/base.css">
@@ -47,10 +48,34 @@
     </div>
 
     <script type="module" src="/js/app.js"></script>
+    
+    <!-- Script pour désactiver les service workers existants -->
     <script>
+        // Désenregistre tous les service workers existants
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                    console.log('ServiceWorker désenregistré');
+                }
+            });
+            
+            // Supprime aussi tous les caches
+            if (window.caches) {
+                caches.keys().then(function(cacheNames) {
+                    cacheNames.forEach(function(cacheName) {
+                        caches.delete(cacheName);
+                    });
+                });
+            }
         }
+        
+        // Force un rechargement sans cache si la page est chargée depuis le cache
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
     </script>
 </body>
-  </html>
+</html>
