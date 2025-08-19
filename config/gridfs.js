@@ -31,6 +31,11 @@ export const streamMedia = (req, res, fileId) => {
     const file = files[0];
     const fileSize = file.length;
 
+    // Désactiver la mise en cache pour les médias
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+
     if (range) {
       const parts = range.replace(/bytes=/, '').split('-');
       const start = parseInt(parts[0], 10);
