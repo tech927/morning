@@ -43,12 +43,19 @@ Le projet est prêt à être déployé avec `npm install && npm start`.
 🎨 Fonctionnalités
 
 · ✅ Upload photos/vidéos avec preview
+
 · ✅ Feed style TikTok (scroll vertical)
+
 · ✅ Système de follow/unfollow
+
 · ✅ Likes et commentaires
+
 · ✅ Profil utilisateur avec statistiques
+
 · ✅ Interface futuriste avec animations
+
 · ✅ PWA (Progressive Web App)
+
 · ✅ Responsive design
 
 🔒 Sécurité
