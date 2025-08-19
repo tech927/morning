@@ -50,6 +50,12 @@ app.use(limiter);
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Ajoutez cette importation
+import { noCache } from './middleware/cache.js';
+
+// Ajoutez ce middleware avant les routes API
+app.use('/api', noCache);
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
